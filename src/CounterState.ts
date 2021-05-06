@@ -5,6 +5,12 @@ const counterState = atom({
     default: 0,
 })
 
+export type useCounterType = typeof useCounter;
+// type useCounterType = {
+//     [count: number; { Minus: () => Promise<void>, Plus: () => Promise<void>
+// }]
+// }
+
 export const useCounter = () => {
 
     const [count,] = useRecoilState(counterState);
