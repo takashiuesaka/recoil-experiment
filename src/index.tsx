@@ -9,8 +9,8 @@ import { RecoilRoot } from 'recoil';
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <App />
-      <App />
+      <App isGlobal={true} />
+      <App isGlobal={true} />
     </RecoilRoot>
     <RecoilRoot>
       <App />

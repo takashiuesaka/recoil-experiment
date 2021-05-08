@@ -29,9 +29,9 @@ import { useCounter } from './CounterState'
 // }
 
 
-function App() {
+function App(props?: { isGlobal?: boolean }) {
 
-  const [count, onClick] = useCounter();
+  const [count, onClick] = useCounter(props?.isGlobal === undefined ? false : props.isGlobal);
 
   return (
     <div>

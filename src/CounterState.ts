@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import { atom, useRecoilCallback, useRecoilState } from 'recoil';
 
 const counterState = atom({
@@ -5,21 +6,30 @@ const counterState = atom({
     default: 0,
 })
 
-export const useCounter = () => {
+export const useCounter = (isGlobal: boolean) => {
 
-    const [count,] = useRecoilState(counterState);
+    const [globalCount,] = useRecoilState(counterState);
+    const [localCount, setLocalCount] = useState(0);
 
-    const onClickMinus = useRecoilCallback(
+    const onClickGlobalMinus = useRecoilCallback(
         ({ set }) => async () => {
             //      const count = await snapshot.getPromise(counterState);
             set(counterState, (val) => val - 1);
         }, []);
 
-    const onClickPlus = useRecoilCallback(
+    const onClickGlobalPlus = useRecoilCallback(
         ({ set }) => async () => {
             set(counterState, (val) => val + 1)
         }
         , [])
 
-    return [count, { Minus: onClickMinus, Plus: onClickPlus }] as const
+    const onClickLocalMinus = useCallback(() => {
+        setLocalCount(val => val - 1);
+    }, []);
+
+    const onClickLocalPlus = useCallback(() => {
+        setLocalCount(val => val - 1);
+    }, []);
+
+    return [isGlobal ? globalCount : localCount, { Minus: isGlobal ? onClickGlobalMinus : onClickLocalMinus, Plus: isGlobal ? onClickGlobalPlus : onClickLocalPlus }] as const
 }
