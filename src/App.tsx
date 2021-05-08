@@ -1,13 +1,14 @@
 import React from 'react';
-import { useCounterType } from './CounterState'
+import { useLocalCounter, useGlobalCounter } from './CounterState'
 
-function App(props: { useCounter?: useCounterType }) {
+function App(props: { isGlobal?: boolean }) {
 
-  const [count, onClick] = props?.useCounter == undefined;
+  const [globalCount, onGlobalClick] = useGlobalCounter();
+  const [localCount, onLocalClick] = useLocalCounter();
 
   return (
     <div>
-      <button onClick={onClick.Minus}>-</button> {count} <button onClick={onClick.Plus}>+</button>
+      <button onClick={props.isGlobal ? onGlobalClick.Minus : onLocalClick.Minus}>-</button> {props.isGlobal ? globalCount : localCount} <button onClick={props.isGlobal ? onGlobalClick.Plus : onLocalClick.Plus}>+</button>
     </div>
   );
 }

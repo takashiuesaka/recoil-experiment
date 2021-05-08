@@ -5,16 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { RecoilRoot } from 'recoil';
+import { } from './CounterState';
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <App />
-      <App />
+      <App isGlobal={true} />
+      <App isGlobal={true} />
     </RecoilRoot>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <App isGlobal={false} />
   </React.StrictMode>,
   document.getElementById('root')
 );
